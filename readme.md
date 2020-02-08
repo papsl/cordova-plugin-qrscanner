@@ -5,6 +5,12 @@
 # cordova-plugin-qrscanner
 A fast, energy efficient, highly-configurable QR code scanner for Cordova apps – available for the iOS, Android, Windows, and browser platforms.
 
+This version (https://github.com/papsl/cordova-plugin-qrscanner) is fork of https://github.com/bitpay/cordova-plugin-qrscanner. It also scans standard Barcodes. Return result is the same as for standard cordova barcode scanner:
+
+```js
+ {text: "9789610022534", format: "EAN_13"}
+```
+
 QRScanner's native camera preview is rendered behind the Cordova app's webview, and QRScanner provides `show` and `hide` methods to toggle the transparency of the webview's background. This allows for a completely HTML/CSS/JS interface to be built inside the webview to control the scanner.
 
 ## Examples

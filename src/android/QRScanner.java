@@ -456,6 +456,19 @@ public class QRScanner extends CordovaPlugin implements BarcodeCallback {
                 //Configure the decoder
                 ArrayList<BarcodeFormat> formatList = new ArrayList<BarcodeFormat>();
                 formatList.add(BarcodeFormat.QR_CODE);
+                formatList.add(BarcodeFormat.DATA_MATRIX);
+                formatList.add(BarcodeFormat.UPC_A);
+                formatList.add(BarcodeFormat.UPC_E);
+                formatList.add(BarcodeFormat.EAN_8);
+                formatList.add(BarcodeFormat.EAN_13);
+                formatList.add(BarcodeFormat.CODE_39);
+                formatList.add(BarcodeFormat.CODE_93);
+                formatList.add(BarcodeFormat.CODE_128);
+                formatList.add(BarcodeFormat.CODABAR);
+                formatList.add(BarcodeFormat.ITF);
+                formatList.add(BarcodeFormat.RSS_14);
+                formatList.add(BarcodeFormat.PDF_417);
+                formatList.add(BarcodeFormat.RSS_EXPANDED);
                 mBarcodeView.setDecoderFactory(new DefaultDecoderFactory(formatList, null, null));
 
                 //Configure the camera (front/back)
@@ -487,8 +500,16 @@ public class QRScanner extends CordovaPlugin implements BarcodeCallback {
 
         if(barcodeResult.getText() != null) {
             scanning = false;
-            this.nextScanCallback.success(barcodeResult.getText());
-            this.nextScanCallback = null;
+            try {
+              JSONObject item = new JSONObject();
+              item.put("text", barcodeResult.getText());
+              item.put("format",barcodeResult.getBarcodeFormat());
+              this.nextScanCallback.success(item);
+              this.nextScanCallback = null;
+            }  catch (JSONException e) {
+              this.nextScanCallback.success(barcodeResult.getText());
+              this.nextScanCallback = null;
+          }
         }
         else {
             scan(this.nextScanCallback);
