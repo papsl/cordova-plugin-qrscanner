@@ -22,6 +22,7 @@
     <source-file src="src/android/QRScanner.java" target-dir="src/com/bitpay/cordova/qrscanner"/>
     <framework src="src/android/qrscanner.gradle" custom="true" type="gradleReference"/>
   </platform>
+
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
       <feature name="QRScanner">
@@ -33,7 +34,10 @@
     <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
       <string>The camera is used to scan barcodes and QR codes.</string>
     </config-file>
+    <pods-config ios-min-version="9.0" use-frameworks="true" />
+    <pod name="ZXingObjC" version="3.2.2" />
   </platform>
+
   <platform name="browser">
     <config-file target="config.xml" parent="/*">
       <feature name="QRScanner">
